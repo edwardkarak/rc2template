@@ -86,12 +86,12 @@ int main(int argc, char *argv[])
 	getchar();
 	return EXIT_SUCCESS;
 }
-int fileExists(const char *const filename)
+int fileExists(const char *filename)
 {
 	int ret = 0;
 	FILE *fp;
 	
-	if ((fp = fopen("sample.txt","r")) != NULL) {
+	if ((fp = fopen(filename, "r")) != NULL) {
 		ret = 1;
 		fclose(file);
 	}
