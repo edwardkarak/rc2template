@@ -20,7 +20,7 @@ If successful, the program will output:
 
 `Generated output.txt (354 bytes) successfully`
 
-`output.txt` contains the following:
+`output.txt` will contain the following:
 
 ```
 static unsigned char dlg129[] = {
