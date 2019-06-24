@@ -14,7 +14,7 @@ Extracts a resource from a module file, and creates the C array containing the b
 `rc2template executable.exe 129 output.txt`
 (using current working directory)
 
-will extract the resource whose ID is `129`, if it exists, from `executable.exe`, if it is found, and will dump the bytes into `output.txt`.
+will extract the resource whose ID is `129`, if it exists, from `executable.exe`, if it is found, and will dump the bytes into `output.txt`. If `output.txt` already exists, the program will ask for your permission to overwrite it first.
 
 If successful, the program will output:
 
