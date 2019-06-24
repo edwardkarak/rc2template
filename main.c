@@ -13,12 +13,12 @@ void die(const char *fmt, ...)
 	exit(EXIT_FAILURE);
 }
 
-void writetemplate(DWORD nres, const unsigned char *buf, int dlgid, FILE *fout)
+void writetemplate(const unsigned char *buf, DWORD nbytes, int dlgid, FILE *fout)
 {
 	fprintf(fout, "static unsigned char dlg%d[] = {\n\t", dlgid);
-	for (DWORD i = 0; i < nres; ++i) {
+	for (DWORD i = 0; i < nbytes; ++i) {
 		fprintf(fout, "0x%x%s", 
-				(unsigned char) (buf[i] & 0xff), i == nres - 1 ? "" : ", ");
+				(unsigned char) (buf[i] & 0xff), i == nbytes - 1 ? "" : ", ");
 		
 		if (i && (i % 14 == 0))		/* wrapping */
 			fprintf(fout, "\n\t");
@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
 	HMODULE mod;
 	HRSRC res;
 	HGLOBAL globalres;
-	DWORD nres;
+	DWORD nbytes;
 	char *endp;
 	unsigned char *buf;
 	int dlgid;
@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 	if ((buf = (unsigned char *) LockResource(globalres)) == NULL)
 		die("Cannot lock resource. Win32 error code %d", GetLastError());
 
-	nres = SizeofResource(mod, res);
+	nbytes = SizeofResource(mod, res);
 	
 	if (fileExists(argv[OUTFILE])) {
 		char line[80];
@@ -76,11 +76,11 @@ int main(int argc, char *argv[])
 	if ((fout = fopen(argv[OUTFILE], "w")) == NULL)
 		die("Cannot open %s for writing: %s", argv[OUTFILE], strerror(errno));
 
-	writetemplate(nres, buf, dlgid, fout);
+	writetemplate(buf, nbytes, dlgid, fout);
 
 	fclose(fout);
 	FreeLibrary(mod);
-	fprintf(stderr, "Generated %s (%d bytes) successfully\n", argv[OUTFILE], nres);	/* use stderr so it can't be piped into a file by accident */
+	fprintf(stderr, "Generated %s (%d bytes) successfully\n", argv[OUTFILE], nbytes);
 	getchar();
 	return EXIT_SUCCESS;
 }
