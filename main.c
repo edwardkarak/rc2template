@@ -15,8 +15,10 @@ void die(const char *fmt, ...)
 
 void writetemplate(const unsigned char *buf, DWORD nbytes, int dlgid, FILE *fout)
 {
+	DWORD i;
+	
 	fprintf(fout, "static unsigned char dlg%d[] = {\n\t", dlgid);
-	for (DWORD i = 0; i < nbytes; ++i) {
+	for (i = 0; i < nbytes; ++i) {
 		fprintf(fout, "0x%x%s", 
 				(unsigned char) (buf[i] & 0xff), i == nbytes - 1 ? "" : ", ");
 		
