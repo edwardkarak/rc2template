@@ -64,6 +64,14 @@ int main(int argc, char *argv[])
 		die("Cannot lock resource. Win32 error code %d", GetLastError());
 
 	nres = SizeofResource(mod, res);
+	
+	if (fileExists(argv[OUTFILE])) {
+		char line[80];
+		printf("The file %s will be overwritten. Proceed (y/n)?");
+		fgets(line, stdin, 80);
+		if (!(line[0] == 'Y' || line[0] == 'y'))
+			die("Permission denied to overwrite %s. Retry with a different name.", argv[OUTFILE]);	
+	}
 
 	if ((fout = fopen(argv[OUTFILE], "w")) == NULL)
 		die("Cannot open %s for writing: %s", argv[OUTFILE], strerror(errno));
@@ -74,5 +82,16 @@ int main(int argc, char *argv[])
 	FreeLibrary(mod);
 	fprintf(stderr, "Generated %s (%d bytes) successfully\n", argv[OUTFILE], nres);	// use stderr so it can't be piped into a file by accident
 	getchar();
-	return 0;
+	return EXIT_SUCCESS;
 }
+int fileExists(const char *const filename)
+{
+	int ret = 0;
+	FILE *fp;
+	
+	if ((fp = fopen("sample.txt","r")) != NULL) {
+		ret = 1;
+		fclose(file);
+	}
+	return ret;
+}	
