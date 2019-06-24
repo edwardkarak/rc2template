@@ -20,7 +20,7 @@ void writetemplate(DWORD nres, const unsigned char *buf, int dlgid, FILE *fout)
 		fprintf(fout, "0x%x%s", 
 				(unsigned char) (buf[i] & 0xff), i == nres - 1 ? "" : ", ");
 		
-		if (i && (i % 14 == 0))		// wrapping
+		if (i && (i % 14 == 0))		/* wrapping */
 			fprintf(fout, "\n\t");
 	}
 	fprintf(fout, "\n};\n");
@@ -80,7 +80,7 @@ int main(int argc, char *argv[])
 
 	fclose(fout);
 	FreeLibrary(mod);
-	fprintf(stderr, "Generated %s (%d bytes) successfully\n", argv[OUTFILE], nres);	// use stderr so it can't be piped into a file by accident
+	fprintf(stderr, "Generated %s (%d bytes) successfully\n", argv[OUTFILE], nres);	/* use stderr so it can't be piped into a file by accident */
 	getchar();
 	return EXIT_SUCCESS;
 }
