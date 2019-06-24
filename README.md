@@ -53,4 +53,4 @@ static unsigned char dlg129[] = {
 };
 ```
 
-which can then be copied and pasted into a C or C++ source file.
+which can then be copied and pasted into a C or C++ source file. This way, you can embed resources from other programs created by other people in your own code.
