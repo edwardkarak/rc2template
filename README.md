@@ -1,12 +1,12 @@
 # rc2template
-Extracts a resource from a module file, and creates the C array containing the bytes of the resource. 
+Extracts a dialog resource from a module file, and creates the C array containing the bytes of the resource. 
 
 ## Usage:
 
 `rc2template MODULE_FILE DLGID OUTFILE`
 
-* `MODULE_FILE` is the executable or DLL from which to extract the resource
-* `DLGID`       is the ID code of the dialog or other resource to extract
+* `MODULE_FILE` is the executable or DLL from which to extract the dialog resource
+* `DLGID`       is the ID code of the resource to extract
 * `OUTFILE`     is the name of the output file to which the array will be sent. Creates a new file of the name given by `OUTFILE`.
 
 ## Example:
@@ -14,7 +14,7 @@ Extracts a resource from a module file, and creates the C array containing the b
 `rc2template executable.exe 129 output.txt`
 (using current working directory)
 
-will extract the resource whose ID is `129`, if it exists, from `executable.exe`, if it is found, and will dump the bytes into `output.txt`. If `output.txt` already exists, the program will ask for your permission to overwrite it first.
+will extract the dialog whose ID is `129`, if it exists, from `executable.exe`, if it is found, and will dump the bytes into `output.txt`. If `output.txt` already exists, the program will ask for your permission to overwrite it first.
 
 If successful, the program will output:
 
