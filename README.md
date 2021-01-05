@@ -1,5 +1,5 @@
 # rc2template
-Extracts a dialog resource from a module file, and creates the C array containing the bytes of the resource. 
+Extracts a dialog resource from a module (executable) file, and creates the C array containing the bytes of the resource. 
 
 ## Usage:
 
